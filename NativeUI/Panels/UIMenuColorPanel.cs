@@ -241,9 +241,7 @@ namespace NativeUI
 			await Task.FromResult(0);
 		}
 	}
-
-
-
+	   
 	public class ColorPanelData
 	{
 		public Pagination Pagination = new Pagination();
