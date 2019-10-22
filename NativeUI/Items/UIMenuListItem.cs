@@ -120,7 +120,7 @@ namespace NativeUI
 			base.Draw();
 
             string caption = Items[Index].ToString();
-            float offset = Screen.GetTextWidth(caption, _itemText.Font, _itemText.Scale);
+            float offset = ScreenTools.GetTextWidth(caption, _itemText.Font, _itemText.Scale);
 
             _itemText.Color = Enabled ? Selected ? Colors.Black : Colors.WhiteSmoke : Color.FromArgb(163, 159, 148);
             

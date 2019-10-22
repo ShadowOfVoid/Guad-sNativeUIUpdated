@@ -3,13 +3,14 @@ using CitizenFX.Core.Native;
 using static CitizenFX.Core.Native.API;
 using System.Drawing;
 using System;
+using CitizenFX.Core.UI;
 
 namespace NativeUI
 {
 	/// <summary>
 	/// Tools to deal with the game screen.
 	/// </summary>
-	public static class Screen
+	public static class ScreenTools
 	{
 		/// <summary>
 		/// The 1080pixels-based screen resolution while mantaining current aspect ratio.
@@ -19,8 +20,8 @@ namespace NativeUI
 			get
 			{
 				// Get the game width and height
-				int screenw = CitizenFX.Core.UI.Screen.Resolution.Width;
-				int screenh = CitizenFX.Core.UI.Screen.Resolution.Height;
+				int screenw = Screen.Resolution.Width;
+				int screenh = Screen.Resolution.Height;
 				// Calculate the ratio
 				float ratio = (float)screenw / screenh;
 				// And the width with that ratio
@@ -43,8 +44,8 @@ namespace NativeUI
 			// Get the resolution while maintaining the ratio.
 			SizeF res = ResolutionMaintainRatio;
 			// Then, get the position of mouse on the screen while relative to the current resolution
-			int mouseX = (int)Math.Round(API.GetControlNormal(0, 239) * res.Width);
-			int mouseY = (int)Math.Round(API.GetControlNormal(0, 240) * res.Height);
+			int mouseX = (int)Math.Round(API.GetDisabledControlNormal(0, 239) * res.Width);
+			int mouseY = (int)Math.Round(API.GetDisabledControlNormal(0, 240) * res.Height);
 			// And check if the mouse is on the rectangle bounds
 			bool isX = mouseX >= topLeft.X && mouseX <= topLeft.X + boxSize.Width;
 			bool isY = mouseY > topLeft.Y && mouseY < topLeft.Y + boxSize.Height;
@@ -59,8 +60,8 @@ namespace NativeUI
 			// Get the resolution while maintaining the ratio.
 			SizeF res = ResolutionMaintainRatio;
 			// Then, get the position of mouse on the screen while relative to the current resolution
-			float mouseX = GetControlNormal(0, 239) * res.Width;
-			float mouseY = GetControlNormal(0, 240) * res.Height;
+			float mouseX = GetDisabledControlNormal(0, 239) * res.Width;
+			float mouseY = GetDisabledControlNormal(0, 240) * res.Height;
 			// And check if the mouse is on the rectangle bounds
 			bool isX = mouseX >= topLeft.X && mouseX <= topLeft.X + boxSize.Width;
 			bool isY = mouseY > topLeft.Y && mouseY < topLeft.Y + boxSize.Height;
@@ -74,8 +75,8 @@ namespace NativeUI
 			Game.EnableControlThisFrame(0, Control.CursorY);
 			SizeF res = ResolutionMaintainRatio;
 
-			int mouseX = (int)Math.Round(API.GetControlNormal(0, 239) * res.Width);
-			int mouseY = (int)Math.Round(API.GetControlNormal(0, 240) * res.Height);
+			int mouseX = (int)Math.Round(API.GetDisabledControlNormal(0, 239) * res.Width);
+			int mouseY = (int)Math.Round(API.GetDisabledControlNormal(0, 240) * res.Height);
 
 			mouseX += DrawOffset.X;
 			mouseY += DrawOffset.Y;
@@ -90,8 +91,8 @@ namespace NativeUI
 			Game.EnableControlThisFrame(0, Control.CursorY);
 			SizeF res = ResolutionMaintainRatio;
 
-			float mouseX = GetControlNormal(0, 239) * res.Width;
-			float mouseY = GetControlNormal(0, 240) * res.Height;
+			float mouseX = GetDisabledControlNormal(0, 239) * res.Width;
+			float mouseY = GetDisabledControlNormal(0, 240) * res.Height;
 
 			mouseX += DrawOffset.X;
 			mouseY += DrawOffset.Y;
@@ -119,8 +120,8 @@ namespace NativeUI
 				g = 10 - g;
 
 				// Then, get the screen resolution
-				int screenw = CitizenFX.Core.UI.Screen.Resolution.Width;
-				int screenh = CitizenFX.Core.UI.Screen.Resolution.Height;
+				int screenw = Screen.Resolution.Width;
+				int screenh = Screen.Resolution.Height;
 				// Calculate the ratio
 				float ratio = (float)screenw / screenh;
 				// And this thing (that I don't know what it does)

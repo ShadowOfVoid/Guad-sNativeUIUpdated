@@ -43,12 +43,12 @@ namespace NativeUI.PauseMenu
 
                 if (value)
                 {
-					CitizenFX.Core.UI.Screen.Effects.Start(ScreenEffect.MinigameTransitionIn, 0, true);
+					Screen.Effects.Start(ScreenEffect.MinigameTransitionIn, 0, true);
 
 				}
 				else
                 {
-					CitizenFX.Core.UI.Screen.Effects.Stop(ScreenEffect.MinigameTransitionIn);
+					Screen.Effects.Stop(ScreenEffect.MinigameTransitionIn);
 				}
 			}
         }
@@ -213,7 +213,7 @@ namespace NativeUI.PauseMenu
 			API.ShowCursorThisFrame();
 
 
-			var res = Screen.ResolutionMaintainRatio;
+			var res = ScreenTools.ResolutionMaintainRatio;
             var safe = new Point(300, 180);
             if (!HideTabs)
             {
@@ -275,7 +275,7 @@ namespace NativeUI.PauseMenu
                     Game.EnableControlThisFrame(0, Control.CursorX);
                     Game.EnableControlThisFrame(0, Control.CursorY);
 
-                    var hovering = Screen.IsMouseInBounds(safe.AddPoints(new Point((tabWidth + 5) * i, 0)),
+                    var hovering = ScreenTools.IsMouseInBounds(safe.AddPoints(new Point((tabWidth + 5) * i, 0)),
                         new Size(tabWidth, 40));
 
                     var tabColor = Tabs[i].Active

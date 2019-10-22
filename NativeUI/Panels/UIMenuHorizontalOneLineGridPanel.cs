@@ -67,7 +67,7 @@ namespace NativeUI
 
 		private async void Functions()
 		{
-			if (Screen.IsMouseInBounds(new PointF(Grid.Position.X + 20f, Grid.Position.Y + 20f), new SizeF(Grid.Size.Width - 40f, Grid.Size.Height - 40f)))
+			if (ScreenTools.IsMouseInBounds(new PointF(Grid.Position.X + 20f, Grid.Position.Y + 20f), new SizeF(Grid.Size.Width - 40f, Grid.Size.Height - 40f)))
 			{
 				if (API.IsDisabledControlPressed(0, 24))
 				{
@@ -76,15 +76,13 @@ namespace NativeUI
 						Pressed = true;
 						Audio.Id = API.GetSoundId();
 						API.PlaySoundFrontend(Audio.Id, Audio.Slider, Audio.Library, true);
-						while (API.IsDisabledControlPressed(0, 24) && Screen.IsMouseInBounds(new PointF(Grid.Position.X + 20f, Grid.Position.Y + 20f), new SizeF(Grid.Size.Width - 40f, Grid.Size.Height - 40f)))
+						while (API.IsDisabledControlPressed(0, 24) && ScreenTools.IsMouseInBounds(new PointF(Grid.Position.X + 20f, Grid.Position.Y + 20f), new SizeF(Grid.Size.Width - 40f, Grid.Size.Height - 40f)))
 						{
 							await BaseScript.Delay(0);
-							var res = Screen.ResolutionMaintainRatio;
-							float mouseX = API.GetControlNormal(0, 239) * res.Width;
-							float mouseY = API.GetControlNormal(0, 240) * res.Height;
-
-							mouseX -= (Circle.Size.Width / 2); mouseY -= (Circle.Size.Height / 2);
-							Circle.Position = new PointF(mouseX > (Grid.Position.X + 10 + Grid.Size.Width - 40) ? (Grid.Position.X + 10 + Grid.Size.Width - 40) : ((mouseX < (Grid.Position.X + 20 - (Circle.Size.Width / 2))) ? (Grid.Position.X + 20 - (Circle.Size.Width / 2)) : mouseX), (mouseY > (Grid.Position.Y + 10 + Grid.Size.Height - 40) ? (Grid.Position.Y + 10 + Grid.Size.Height - 40) : ((mouseY < (Grid.Position.Y + 20 - (Circle.Size.Height / 2))) ? (Grid.Position.Y + 20 - (Circle.Size.Height / 2)) : mouseY)));
+							var res = ScreenTools.ResolutionMaintainRatio;
+							float mouseX = API.GetDisabledControlNormal(0, 239) * res.Width;
+							mouseX -= (Circle.Size.Width / 2);
+							Circle.Position = new PointF(mouseX > (Grid.Position.X + 10 + Grid.Size.Width - 40) ? (Grid.Position.X + 10 + Grid.Size.Width - 40) : ((mouseX < (Grid.Position.X + 20 - (Circle.Size.Width / 2))) ? (Grid.Position.X + 20 - (Circle.Size.Width / 2)) : mouseX), 0.5f);
 							var resultX = (float)Math.Round((Circle.Position.X - (Grid.Position.X + 20) + (Circle.Size.Width + 20)) / (Grid.Size.Width - 40), 2);
 							UpdateParent(((resultX >= 0.0f && resultX <= 1.0f) ? resultX : ((resultX <= 0f) ? 0.0f : 1.0f) * 2f) - 1f);
 						}

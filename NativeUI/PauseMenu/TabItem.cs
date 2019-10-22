@@ -48,7 +48,7 @@ namespace NativeUI.PauseMenu
         {
             if (!Visible) return;
 
-            var res = Screen.ResolutionMaintainRatio;
+            var res = ScreenTools.ResolutionMaintainRatio;
 
             if (UseDynamicPositionment)
             {

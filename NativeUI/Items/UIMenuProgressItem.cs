@@ -107,12 +107,12 @@ namespace NativeUI
 
 		public async void Functions()
 		{
-			if (Screen.IsMouseInBounds(new PointF((int)Math.Round(Bar.Position.X), (int)Math.Round(Bar.Position.Y - 12)), new Size((int)Max, (int)Math.Round(Bar.Size.Height + 24)), Offset))
+			if (ScreenTools.IsMouseInBounds(new PointF((int)Math.Round(Bar.Position.X), (int)Math.Round(Bar.Position.Y - 12)), new Size((int)Max, (int)Math.Round(Bar.Size.Height + 24)), Offset))
 			{
 				if (API.IsDisabledControlPressed(0, 24))
 				{
-					var ress = Screen.ResolutionMaintainRatio;
-					float CursorX = (float)Math.Round(API.GetControlNormal(0, 239) * ress.Width);
+					var ress = ScreenTools.ResolutionMaintainRatio;
+					float CursorX = (float)Math.Round(API.GetDisabledControlNormal(0, 239) * ress.Width);
 					CalculateProgress(CursorX);
 					Parent.ProgressChange(this, Index);
 					ProgressChanged(Parent, this, Index);

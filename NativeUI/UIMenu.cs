@@ -289,14 +289,14 @@ namespace NativeUI
         /// Returns the 1080pixels-based screen resolution while mantaining current aspect ratio.
         /// </summary>
         [Obsolete("Use Screen.ResolutionMaintainRatio instead.", true)]
-        public static SizeF GetScreenResolutionMaintainRatio() => Screen.ResolutionMaintainRatio;
+        public static SizeF GetScreenResolutionMaintainRatio() => ScreenTools.ResolutionMaintainRatio;
         
         /// <summary>
         /// Screen.ResolutionMaintainRatio for providing backwards compatibility.
         /// </summary>
         /// <returns></returns>
         [Obsolete("Use Screen.ResolutionMaintainRatio instead.", true)]
-        public static SizeF GetScreenResolutionMantainRatio() => Screen.ResolutionMaintainRatio;
+        public static SizeF GetScreenResolutionMantainRatio() => ScreenTools.ResolutionMaintainRatio;
 
         /// <summary>
         /// Chech whether the mouse is inside the specified rectangle.
@@ -305,13 +305,13 @@ namespace NativeUI
         /// <param name="boxSize">size of your rectangle.</param>
         /// <returns>true if the mouse is inside of the specified bounds, false otherwise.</returns>
         [Obsolete("Use Screen.IsMouseInBounds instead.", true)]
-        public static bool IsMouseInBounds(Point topLeft, Size boxSize) => Screen.IsMouseInBounds(topLeft, boxSize);
+        public static bool IsMouseInBounds(Point topLeft, Size boxSize) => ScreenTools.IsMouseInBounds(topLeft, boxSize);
 
 		/// <summary>
 		/// Returns the safezone bounds in pixel, relative to the 1080pixel based system.
 		/// </summary>
 		[Obsolete("Use Screen.SafezoneBounds instead.", true)]
-		public static Point GetSafezoneBounds() => Screen.SafezoneBounds;
+		public static Point GetSafezoneBounds() => ScreenTools.SafezoneBounds;
 
 		#endregion
 
@@ -497,7 +497,7 @@ namespace NativeUI
 
 			DrawWidth = new Size(431 + WidthOffset, 107);
 
-            Safe = Screen.SafezoneBounds;
+            Safe = ScreenTools.SafezoneBounds;
 
             BackgroundSize = Size > MaxItemsOnScreen + 1 ? new Size(431 + WidthOffset, 38 * (MaxItemsOnScreen + 1) + (int)Math.Round(WindowHeight)) : new Size(431 + WidthOffset, 38 * Size+ (int)Math.Round(WindowHeight));
 
@@ -518,7 +518,7 @@ namespace NativeUI
 				_descriptionText.Caption = descCaption;
 				_descriptionText.Wrap = 400;
 
-				int numLines = Screen.GetLineCount(descCaption, _descriptionText.Position, _descriptionText.Font, _descriptionText.Scale, _descriptionText.Position.X + 400);
+				int numLines = ScreenTools.GetLineCount(descCaption, _descriptionText.Position, _descriptionText.Font, _descriptionText.Scale, _descriptionText.Position.X + 400);
 
 				_descriptionRectangle.Size = new Size(431 + WidthOffset, (numLines * 25) + 15);
             }         
@@ -960,7 +960,7 @@ namespace NativeUI
         {
 			API.BeginTextCommandWidth("jamyfafi");
 			UIResText.AddLongString(item.Text);
-            var res = Screen.ResolutionMaintainRatio;
+            var res = ScreenTools.ResolutionMaintainRatio;
             var screenw = res.Width;
             var screenh = res.Height;
             const float height = 1080f;
@@ -970,9 +970,9 @@ namespace NativeUI
 
 			int labelSizeX = 5 + labelSize + 10;
             int arrowSizeX = 431 - labelSizeX;
-            return Screen.IsMouseInBounds(topLeft, new Size(labelSizeX, 38))
+            return ScreenTools.IsMouseInBounds(topLeft, new Size(labelSizeX, 38))
                 ? 1
-                : Screen.IsMouseInBounds(new Point(topLeft.X + labelSizeX, topLeft.Y), new Size(arrowSizeX, 38)) ? 2 : 0;
+                : ScreenTools.IsMouseInBounds(new Point(topLeft.X + labelSizeX, topLeft.Y), new Size(arrowSizeX, 38)) ? 2 : 0;
 
         }
 
@@ -980,7 +980,7 @@ namespace NativeUI
 		{
 			API.BeginTextCommandWidth("jamyfafi");
 			UIResText.AddLongString(item.Text);
-			var res = Screen.ResolutionMaintainRatio;
+			var res = ScreenTools.ResolutionMaintainRatio;
 			var screenw = res.Width;
 			var screenh = res.Height;
 			const float height = 1080f;
@@ -990,9 +990,9 @@ namespace NativeUI
 
 			int labelSizeX = 5 + labelSize + 10;
 			int arrowSizeX = 431 - labelSizeX;
-			return Screen.IsMouseInBounds(topLeft, new Size(labelSizeX, 38))
+			return ScreenTools.IsMouseInBounds(topLeft, new Size(labelSizeX, 38))
 				? 1
-				: Screen.IsMouseInBounds(new PointF(topLeft.X + labelSizeX, topLeft.Y), new Size(arrowSizeX, 38)) ? 2 : 0;
+				: ScreenTools.IsMouseInBounds(new PointF(topLeft.X + labelSizeX, topLeft.Y), new Size(arrowSizeX, 38)) ? 2 : 0;
 
 		}
 
@@ -1012,9 +1012,9 @@ namespace NativeUI
             if (_buttonsEnabled)
             {
 				API.DrawScaleformMovieFullscreen(_instructionalButtonsScaleform.Handle, 255, 255, 255, 255, 0);
-				CitizenFX.Core.UI.Screen.Hud.HideComponentThisFrame(HudComponent.VehicleName);
-				CitizenFX.Core.UI.Screen.Hud.HideComponentThisFrame(HudComponent.AreaName);
-				CitizenFX.Core.UI.Screen.Hud.HideComponentThisFrame(HudComponent.StreetName);
+				Screen.Hud.HideComponentThisFrame(HudComponent.VehicleName);
+				Screen.Hud.HideComponentThisFrame(HudComponent.AreaName);
+				Screen.Hud.HideComponentThisFrame(HudComponent.StreetName);
             }
             // _instructionalButtonsScaleform.Render2D(); // Bug #13
 
@@ -1181,19 +1181,19 @@ namespace NativeUI
                 return;
             }
 
-            Point safezoneOffset = Screen.SafezoneBounds;
+            Point safezoneOffset = ScreenTools.SafezoneBounds;
 			ShowCursorThisFrame();
 			int limit = MenuItems.Count - 1;
             int counter = 0;
             if (MenuItems.Count > MaxItemsOnScreen + 1)
                 limit = _maxItem;
 
-            if (Screen.IsMouseInBounds(new Point(0, 0), new Size(30, 1080)) && MouseEdgeEnabled)
+            if (ScreenTools.IsMouseInBounds(new Point(0, 0), new Size(30, 1080)) && MouseEdgeEnabled)
             {
                 GameplayCamera.RelativeHeading += 5f;
 				SetCursorSprite(6);
 			}
-            else if (Screen.IsMouseInBounds(new Point(Convert.ToInt32(Screen.ResolutionMaintainRatio.Width - 30f), 0), new Size(30, 1080)) && MouseEdgeEnabled)
+            else if (ScreenTools.IsMouseInBounds(new Point(Convert.ToInt32(ScreenTools.ResolutionMaintainRatio.Width - 30f), 0), new Size(30, 1080)) && MouseEdgeEnabled)
             {
                 GameplayCamera.RelativeHeading -= 5f;
 				SetCursorSprite(7);
@@ -1211,7 +1211,7 @@ namespace NativeUI
                 int xsize = 431 + WidthOffset;
                 const int ysize = 38;
                 UIMenuItem uiMenuItem = MenuItems[i];
-                if (Screen.IsMouseInBounds(new PointF(xpos, ypos), new Size(xsize, ysize)))
+                if (ScreenTools.IsMouseInBounds(new PointF(xpos, ypos), new Size(xsize, ysize)))
                 {
                     uiMenuItem.Hovered = true;
                     int res = IsMouseInListItemArrows(MenuItems[i], new PointF(xpos, yposSelected),
@@ -1259,7 +1259,7 @@ namespace NativeUI
             float extraY = 144 + 38 * (MaxItemsOnScreen + 1) + Offset.Y - 37 + _extraYOffset + safezoneOffset.Y + WindowHeight;
 			float extraX = safezoneOffset.X + Offset.X;
             if (Size <= MaxItemsOnScreen + 1) return;
-            if (Screen.IsMouseInBounds(new PointF(extraX, extraY), new Size(431 + WidthOffset, 18)))
+            if (ScreenTools.IsMouseInBounds(new PointF(extraX, extraY), new Size(431 + WidthOffset, 18)))
             {
                 _extraRectangleUp.Color = Color.FromArgb(255, 30, 30, 30);
                 if (Game.IsControlJustPressed(0, Control.Attack))
@@ -1273,7 +1273,7 @@ namespace NativeUI
             else
                 _extraRectangleUp.Color = Color.FromArgb(200, 0, 0, 0);
 
-            if (Screen.IsMouseInBounds(new PointF(extraX, extraY + 18), new Size(431 + WidthOffset, 18)))
+            if (ScreenTools.IsMouseInBounds(new PointF(extraX, extraY + 18), new Size(431 + WidthOffset, 18)))
             {
                 _extraRectangleDown.Color = Color.FromArgb(255, 30, 30, 30);
                 if (Game.IsControlJustPressed(0, Control.Attack))
@@ -1401,7 +1401,7 @@ namespace NativeUI
                 if (ParentMenu != null || !value) return;
                 if (!ResetCursorOnOpen) return;
                 // Cursor.Position = new Point(Screen.PrimaryScreen.Bounds.Width / 2, Screen.PrimaryScreen.Bounds.Height / 2);
-                API.SetCursorLocation(CitizenFX.Core.UI.Screen.Resolution.Width / 2f, CitizenFX.Core.UI.Screen.Resolution.Height / 2f);
+                API.SetCursorLocation(Screen.Resolution.Width / 2f, Screen.Resolution.Height / 2f);
 				SetCursorSprite(1);
 			}
 		}

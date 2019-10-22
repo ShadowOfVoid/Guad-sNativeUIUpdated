@@ -98,10 +98,10 @@ namespace NativeUI
 		}
 
 		[Obsolete("Use Screen.GetTextWidth instead.", true)]
-		public static float MeasureStringWidth(string str, Font font, float scale) => Screen.GetTextWidth(str, font, scale);
+		public static float MeasureStringWidth(string str, Font font, float scale) => ScreenTools.GetTextWidth(str, font, scale);
 
 		[Obsolete("Use Screen.GetTextWidth instead.", true)]
-		public static float MeasureStringWidthNoConvert(string str, Font font, float scale) => Screen.GetTextWidth(str, font, scale);
+		public static float MeasureStringWidthNoConvert(string str, Font font, float scale) => ScreenTools.GetTextWidth(str, font, scale);
 
 		/// <summary>
 		/// Width of the text wrap box. Set to zero to disable.
@@ -119,8 +119,8 @@ namespace NativeUI
 
         public override void Draw(SizeF offset)
         {
-			int screenw = CitizenFX.Core.UI.Screen.Resolution.Width;
-			int screenh = CitizenFX.Core.UI.Screen.Resolution.Height;
+			int screenw = Screen.Resolution.Width;
+			int screenh = Screen.Resolution.Height;
 			const float height = 1080f;
 			float ratio = (float)screenw / screenh;
 			var width = height * ratio;
@@ -160,8 +160,8 @@ namespace NativeUI
 
 		public static void Draw(string caption, int xPos, int yPos, Font font, float scale, Color color, Alignment alignment, bool dropShadow, bool outline, int wordWrap)
         {
-			int screenw = CitizenFX.Core.UI.Screen.Resolution.Width;
-			int screenh = CitizenFX.Core.UI.Screen.Resolution.Height;
+			int screenw = Screen.Resolution.Width;
+			int screenh = Screen.Resolution.Height;
 			const float height = 1080f;
 			float ratio = (float)screenw / screenh;
 			var width = height * ratio;

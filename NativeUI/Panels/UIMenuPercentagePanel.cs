@@ -22,8 +22,8 @@ namespace NativeUI
 		{
 			get
 			{
-				var res = Screen.ResolutionMaintainRatio;
-				float progress = (float)Math.Round(API.GetControlNormal(0, 239) * res.Width) - ActiveBar.Position.X;
+				var res = ScreenTools.ResolutionMaintainRatio;
+				float progress = (float)Math.Round(API.GetDisabledControlNormal(0, 239) * res.Width) - ActiveBar.Position.X;
 				return (float)Math.Round(((progress >= 0 && progress <= 413) ? progress : ((progress < 0) ? 0 : 413)) / Background.Size.Width, 2);
 			}
 			set
@@ -67,7 +67,7 @@ namespace NativeUI
 
 		private async void Functions()
 		{
-			if (Screen.IsMouseInBounds(new PointF(BackgroundBar.Position.X, BackgroundBar.Position.Y - 4f), new SizeF(BackgroundBar.Size.Width, BackgroundBar.Size.Height + 8f)))
+			if (ScreenTools.IsMouseInBounds(new PointF(BackgroundBar.Position.X, BackgroundBar.Position.Y - 4f), new SizeF(BackgroundBar.Size.Width, BackgroundBar.Size.Height + 8f)))
 			{
 				if (API.IsDisabledControlPressed(0, 24))
 				{
@@ -76,11 +76,11 @@ namespace NativeUI
 						Pressed = true;
 						Audio.Id = API.GetSoundId();
 						API.PlaySoundFrontend(Audio.Id, Audio.Slider, Audio.Library, true);
-						while (API.IsDisabledControlPressed(0, 24) && Screen.IsMouseInBounds(new PointF(BackgroundBar.Position.X, BackgroundBar.Position.Y - 4f), new SizeF(BackgroundBar.Size.Width, BackgroundBar.Size.Height + 8f)))
+						while (API.IsDisabledControlPressed(0, 24) && ScreenTools.IsMouseInBounds(new PointF(BackgroundBar.Position.X, BackgroundBar.Position.Y - 4f), new SizeF(BackgroundBar.Size.Width, BackgroundBar.Size.Height + 8f)))
 						{
 							await BaseScript.Delay(0);
-							var res = Screen.ResolutionMaintainRatio;
-							float Progress = API.GetControlNormal(0, 239) * res.Width;
+							var res = ScreenTools.ResolutionMaintainRatio;
+							float Progress = API.GetDisabledControlNormal(0, 239) * res.Width;
 							Progress -= ActiveBar.Position.X;
 							ActiveBar.Size = new SizeF(Progress >= 0 && Progress <= 413 ? Progress : (Progress < 0 ? 0 : 413), ActiveBar.Size.Height);
 							UpdateParent((float)Math.Round(Progress >= 0 && Progress <= 413 ? Progress : (Progress < 0 ? 0 : 413) / BackgroundBar.Size.Width, 2));

@@ -27,8 +27,8 @@ namespace NativeUI
 		public override void Draw(SizeF offset)
         {
             if (!Enabled) return;
-            int screenw = CitizenFX.Core.UI.Screen.Resolution.Width;
-            int screenh = CitizenFX.Core.UI.Screen.Resolution.Height;
+            int screenw = Screen.Resolution.Width;
+            int screenh = Screen.Resolution.Height;
             const float height = 1080f;
             float ratio = (float)screenw / screenh;
             var width = height * ratio;
@@ -43,8 +43,8 @@ namespace NativeUI
 
 		public static void Draw(int xPos, int yPos, int boxWidth, int boxHeight, Color color)
         {
-            int screenw = CitizenFX.Core.UI.Screen.Resolution.Width;
-            int screenh = CitizenFX.Core.UI.Screen.Resolution.Height;
+            int screenw = Screen.Resolution.Width;
+            int screenh = Screen.Resolution.Height;
             const float height = 1080f;
             float ratio = (float)screenw / screenh;
             var width = height * ratio;

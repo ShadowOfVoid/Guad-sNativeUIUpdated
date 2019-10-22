@@ -147,7 +147,7 @@ namespace NativeUI.PauseMenu
             base.Draw();
             if (Heists.Count == 0) return;
 
-            var res = Screen.ResolutionMaintainRatio;
+            var res = ScreenTools.ResolutionMaintainRatio;
 
             var activeWidth = res.Width - SafeSize.X * 2;
             var itemSize = new Size((int)activeWidth - 515, 40);
@@ -213,7 +213,7 @@ namespace NativeUI.PauseMenu
                 }.Draw();
 
                 new UIResRectangle(new Point((int) res.Width - SafeSize.X - 512, SafeSize.Y + 256 + 44 + 40*propLen),
-                    new Size(512, 45*(int)(Screen.GetTextWidth(Heists[Index].Description, (CitizenFX.Core.UI.Font)0, 0.35f)/500)),
+                    new Size(512, 45*(int)(ScreenTools.GetTextWidth(Heists[Index].Description, (CitizenFX.Core.UI.Font)0, 0.35f)/500)),
                     Color.FromArgb(blackAlpha, 0, 0, 0)).Draw();
             }
         }

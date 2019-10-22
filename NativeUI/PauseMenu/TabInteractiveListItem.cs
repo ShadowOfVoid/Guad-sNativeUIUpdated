@@ -132,7 +132,7 @@ namespace NativeUI.PauseMenu
             if (!Visible) return;
             base.Draw();
 
-            var res = Screen.ResolutionMaintainRatio;
+            var res = ScreenTools.ResolutionMaintainRatio;
 
             var alpha = Focused ? 120 : 30;
             var blackAlpha = Focused ? 200 : 100;
@@ -144,7 +144,7 @@ namespace NativeUI.PauseMenu
             int i = 0;
             for (int c = _minItem; c < Math.Min(Items.Count, _maxItem); c++)
             {
-                var hovering = Screen.IsMouseInBounds(SafeSize.AddPoints(new Point(0, (itemSize.Height + 3) * i)),
+                var hovering = ScreenTools.IsMouseInBounds(SafeSize.AddPoints(new Point(0, (itemSize.Height + 3) * i)),
                     itemSize);
 
                 var hasLeftBadge = Items[c].LeftBadge != UIMenuItem.BadgeStyle.None;
@@ -217,7 +217,7 @@ namespace NativeUI.PauseMenu
                     { TextAlignment = Alignment.Right };
 
                     string caption = convItem.Items[convItem.Index].ToString();
-                    float offset = Screen.GetTextWidth(caption, itemText.Font, itemText.Scale);
+                    float offset = ScreenTools.GetTextWidth(caption, itemText.Font, itemText.Scale);
 
                     var selected = c == Index && Focused;
 

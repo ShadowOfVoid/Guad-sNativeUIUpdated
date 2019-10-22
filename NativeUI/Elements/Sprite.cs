@@ -74,8 +74,8 @@ namespace NativeUI
 			if (!API.HasStreamedTextureDictLoaded(TextureDict))
 				API.RequestStreamedTextureDict(TextureDict, true);
 
-			int screenw = CitizenFX.Core.UI.Screen.Resolution.Width;
-            int screenh = CitizenFX.Core.UI.Screen.Resolution.Height;
+			int screenw = Screen.Resolution.Width;
+            int screenh = Screen.Resolution.Height;
             const float height = 1080f;
             float ratio = (float)screenw/screenh;
             var width = height*ratio;
@@ -95,8 +95,8 @@ namespace NativeUI
 				API.RequestStreamedTextureDict(dict, true);
 
 
-			int screenw = CitizenFX.Core.UI.Screen.Resolution.Width;
-            int screenh = CitizenFX.Core.UI.Screen.Resolution.Height;
+			int screenw = Screen.Resolution.Width;
+            int screenh = Screen.Resolution.Height;
             const float height = 1080f;
             float ratio = (float)screenw / screenh;
             var width = height * ratio;
