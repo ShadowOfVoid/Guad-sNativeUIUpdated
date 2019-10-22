@@ -3,6 +3,8 @@
 
 NativeUI is a ScriptHookDotNet based library that helps you quickly and easily build Rockstar-like menus.
 
+### THIS VERSION IS UPDATED TO THE LATEST MASTER BRANCH FROM GUAD'S NATIVEUI WITH NativeUILua_Reloaded Panels and Items and Windows additions.
+
 ### Documentation
 Take a look at our [wiki page](https://github.com/Guad/NativeUI/wiki/Home).
 
